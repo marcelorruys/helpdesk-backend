@@ -1,5 +1,6 @@
 package com.marcelo.helpdesk.resources.exceptions;
 
+import com.marcelo.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.marcelo.helpdesk.services.exceptions.ObjectNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -15,5 +16,12 @@ public class ResourceExceptionHandler {
         StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(),
                 "Object not Found", e.getMessage(), request.getRequestURI());
         return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<StandardError> dataIntegrityViolationException(DataIntegrityViolationException e, HttpServletRequest request) {
+        StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
+                "Data Violation", e.getMessage(), request.getRequestURI());
+        return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 }
