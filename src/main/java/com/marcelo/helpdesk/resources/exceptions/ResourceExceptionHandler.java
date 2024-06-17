@@ -5,6 +5,7 @@ import com.marcelo.helpdesk.services.exceptions.ObjectNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -23,5 +24,18 @@ public class ResourceExceptionHandler {
         StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
                 "Data Violation", e.getMessage(), request.getRequestURI());
         return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<StandardError> validationErrors(MethodArgumentNotValidException e, HttpServletRequest request) {
+
+        ValidationError errors = new ValidationError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
+                "Validation Error", "Erro na validação dos campos", request.getRequestURI());
+
+        e.getBindingResult().getFieldErrors().forEach(x -> {
+            errors.addError(x.getField(), x.getDefaultMessage());
+        });
+
+        return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
 }
