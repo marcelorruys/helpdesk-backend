@@ -13,7 +13,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/tecnicos")
+@RequestMapping(value = "/clientes")
 public class ClienteResource {
 
     @Autowired
