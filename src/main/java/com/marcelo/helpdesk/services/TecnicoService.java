@@ -8,6 +8,7 @@ import com.marcelo.helpdesk.repositories.TecnicoRepository;
 import com.marcelo.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.marcelo.helpdesk.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,5 +57,13 @@ public class TecnicoService {
         validaPorCpfEEmail(objDTO);
         oldObj = new Tecnico(objDTO);
         return repository.save(oldObj);
+    }
+
+    public void delete(Integer id) {
+        Tecnico obj = findById(id);
+        if (obj.getChamados().size() > 0) {
+            throw new DataIntegrityViolationException("Técnico possui ordens de serviço e não pode ser deletado!");
+        }
+        repository.deleteById(id);
     }
 }
