@@ -34,7 +34,6 @@ public class ClienteDTO implements Serializable {
     protected LocalDate dataCriacao = LocalDate.now();
 
     public ClienteDTO() {
-        super();
         addPerfil(Perfil.CLIENTE);
     }
 

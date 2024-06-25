@@ -45,7 +45,6 @@ public abstract class Pessoa implements Serializable {
     protected LocalDate dataCriacao = LocalDate.now();
 
     public Pessoa() {
-        super();
         addPerfil(Perfil.CLIENTE);
     }
 

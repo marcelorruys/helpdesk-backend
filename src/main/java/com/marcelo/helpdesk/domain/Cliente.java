@@ -26,7 +26,6 @@ public class Cliente extends Pessoa implements Serializable {
     private List<Chamado> chamados = new ArrayList<>();
 
     public Cliente() {
-        super();
         addPerfil(Perfil.CLIENTE);
     }
 

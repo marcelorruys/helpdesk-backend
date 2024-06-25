@@ -1,6 +1,7 @@
 package com.marcelo.helpdesk.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.marcelo.helpdesk.domain.dtos.ChamadoDTO;
 import com.marcelo.helpdesk.domain.enums.Prioridade;
 import com.marcelo.helpdesk.domain.enums.Status;
 import jakarta.persistence.*;
@@ -43,7 +44,6 @@ public class Chamado implements Serializable {
     private Cliente cliente;
 
     public Chamado() {
-        super();
     }
 
     public Chamado(Integer id, Prioridade prioridade, Status status, String titulo, String observacoes, Tecnico tecnico, Cliente cliente) {

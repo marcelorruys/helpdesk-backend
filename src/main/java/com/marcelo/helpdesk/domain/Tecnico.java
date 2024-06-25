@@ -26,7 +26,6 @@ public class Tecnico extends Pessoa implements Serializable {
     private List<Chamado> chamados = new ArrayList<>();
 
     public Tecnico() {
-        super();
         addPerfil(Perfil.CLIENTE);
     }
 
