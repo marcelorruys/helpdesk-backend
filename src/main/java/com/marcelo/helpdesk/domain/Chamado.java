@@ -55,4 +55,14 @@ public class Chamado implements Serializable {
         this.tecnico = tecnico;
         this.cliente = cliente;
     }
+
+    public Chamado(ChamadoDTO objDTO) {
+        this.id = objDTO.getId();
+        this.prioridade = Prioridade.toEnum(objDTO.getPrioridade());
+        this.status = Status.toEnum(objDTO.getStatus());
+        this.titulo = titulo;
+        this.observacoes = observacoes;
+        this.tecnico = tecnico;
+        this.cliente = cliente;
+    }
 }
