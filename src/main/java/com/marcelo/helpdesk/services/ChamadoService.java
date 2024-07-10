@@ -6,17 +6,17 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.marcelo.helpdesk.domain.Tecnico;
+import com.marcelo.helpdesk.domain.dtos.ChamadoDTO;
+import com.marcelo.helpdesk.domain.enums.Prioridade;
+import com.marcelo.helpdesk.domain.enums.Status;
 import com.marcelo.helpdesk.repositories.ChamadoRepository;
+import com.marcelo.helpdesk.services.exceptions.ObjectnotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.marcelo.helpdesk.domain.Chamado;
 import com.marcelo.helpdesk.domain.Cliente;
-import com.marcelo.helpdesk.domain.Tecnico;
-import com.marcelo.helpdesk.domain.dtos.ChamadoDTO;
-import com.marcelo.helpdesk.domain.enums.Prioridade;
-import com.marcelo.helpdesk.domain.enums.Status;
-import com.marcelo.helpdesk.services.exceptions.ObjectnotFoundException;
 
 @Service
 public class ChamadoService {

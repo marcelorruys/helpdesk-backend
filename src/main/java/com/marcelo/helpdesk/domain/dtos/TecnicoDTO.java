@@ -8,11 +8,11 @@ import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
 
-import com.marcelo.helpdesk.domain.Tecnico;
-import com.marcelo.helpdesk.domain.enums.Perfil;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.marcelo.helpdesk.domain.Tecnico;
+import com.marcelo.helpdesk.domain.enums.Perfil;
 
 public class TecnicoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;

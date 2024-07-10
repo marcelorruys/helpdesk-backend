@@ -10,5 +10,4 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Integer> {
 
 	Optional<Pessoa> findByCpf(String cpf);
 	Optional<Pessoa> findByEmail(String email);
-
 }

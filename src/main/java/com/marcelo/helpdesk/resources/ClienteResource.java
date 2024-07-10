@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.marcelo.helpdesk.domain.dtos.ClienteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.marcelo.helpdesk.domain.Cliente;
-import com.marcelo.helpdesk.domain.dtos.ClienteDTO;
 import com.marcelo.helpdesk.services.ClienteService;
 
 @RestController
