@@ -1,7 +1,9 @@
 package com.marcelo.helpdesk.repositories;
 
-import com.marcelo.helpdesk.domain.Tecnico;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.marcelo.helpdesk.domain.Tecnico;
+
 public interface TecnicoRepository extends JpaRepository<Tecnico, Integer> {
+
 }

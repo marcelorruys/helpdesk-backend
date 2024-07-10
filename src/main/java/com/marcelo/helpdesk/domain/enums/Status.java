@@ -1,27 +1,36 @@
 package com.marcelo.helpdesk.domain.enums;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-@Getter
-@AllArgsConstructor
 public enum Status {
 
-    ABERTO(0, "ABERTO"), ANDAMENTO(1, "ANDAMENTO"), ENCERRADO(2, "ENCERRADO");
+	ABERTO(0, "ABERTO"), ANDAMENTO(1, "ANDAMENTO"), ENCERRADO(2, "ENCERRADO");
+	
+	private Integer codigo;
+	private String descricao;
+	
+	private Status(Integer codigo, String descricao) {
+		this.codigo = codigo;
+		this.descricao = descricao;
+	}
 
-    private Integer codigo;
-    private String descricao;
+	public Integer getCodigo() {
+		return codigo;
+	}
 
-    public static Status toEnum(Integer cod){
-        if (cod == null){
-            return null;
-        }
-
-        for (Status x : Status.values()) {
-            if (cod.equals(x.getCodigo())){
-                return x;
-            }
-        }
-        throw new IllegalArgumentException("Status Inválido");
-    }
+	public String getDescricao() {
+		return descricao;
+	}
+	
+	public static Status toEnum(Integer cod) {
+		if(cod == null) {
+			return null;
+		}
+		
+		for(Status x : Status.values()) {
+			if(cod.equals(x.getCodigo())) {
+				return x;
+			}
+		}
+		
+		throw new IllegalArgumentException("Status inválido");
+	}
 }

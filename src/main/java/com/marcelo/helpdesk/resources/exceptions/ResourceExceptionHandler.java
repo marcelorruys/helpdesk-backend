@@ -1,41 +1,59 @@
 package com.marcelo.helpdesk.resources.exceptions;
 
-import com.marcelo.helpdesk.services.exceptions.DataIntegrityViolationException;
-import com.marcelo.helpdesk.services.exceptions.ObjectNotFoundException;
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.marcelo.helpdesk.services.exceptions.DataIntegrityViolationException;
+import com.marcelo.helpdesk.services.exceptions.ObjectnotFoundException;
+
 @ControllerAdvice
 public class ResourceExceptionHandler {
 
-    @ExceptionHandler(ObjectNotFoundException.class)
-    public ResponseEntity<StandardError> objectNotFoundException(ObjectNotFoundException e, HttpServletRequest request) {
-        StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(),
-                "Object not Found", e.getMessage(), request.getRequestURI());
-        return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-    }
+	@ExceptionHandler(ObjectnotFoundException.class)
+	public ResponseEntity<StandardError> objectnotFoundException(ObjectnotFoundException ex,
+			HttpServletRequest request) {
 
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<StandardError> dataIntegrityViolationException(DataIntegrityViolationException e, HttpServletRequest request) {
-        StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
-                "Data Violation", e.getMessage(), request.getRequestURI());
-        return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
-    }
+		StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(),
+				"Object Not Found", ex.getMessage(), request.getRequestURI());
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<StandardError> validationErrors(MethodArgumentNotValidException e, HttpServletRequest request) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+	}
 
-        ValidationError errors = new ValidationError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
-                "Validation Error", "Erro na validação dos campos", request.getRequestURI());
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	public ResponseEntity<StandardError> dataIntegrityViolationException(DataIntegrityViolationException ex,
+			HttpServletRequest request) {
 
-        e.getBindingResult().getFieldErrors().forEach(x -> {
-            errors.addError(x.getField(), x.getDefaultMessage());
-        });
+		StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
+				"Violação de dados", ex.getMessage(), request.getRequestURI());
 
-        return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
-    }
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+	}
+
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<StandardError> validationErrors(MethodArgumentNotValidException ex,
+			HttpServletRequest request) {
+
+		ValidationError errors = new ValidationError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), 
+				"Validation error", "Erro na validação dos campos", request.getRequestURI());
+		
+		for(FieldError x : ex.getBindingResult().getFieldErrors()) {
+			errors.addError(x.getField(), x.getDefaultMessage());
+		}
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+	}
 }
+
+
+
+
+
+
+
+

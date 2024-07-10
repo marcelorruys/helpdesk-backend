@@ -1,27 +1,37 @@
 package com.marcelo.helpdesk.resources.exceptions;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import java.io.Serial;
 import java.io.Serializable;
 
 public class FieldMessage implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Getter @Setter
-    private String fieldName;
-    @Getter @Setter
-    private String message;
+	private String fieldName;
+	private String message;
 
-    public  FieldMessage(){
-        super();
-    }
+	public FieldMessage() {
+		super();
+	}
 
-    public FieldMessage(String fieldName, String message) {
-        super();
-        this.fieldName = fieldName;
-        this.message = message;
-    }
+	public FieldMessage(String fieldName, String message) {
+		super();
+		this.fieldName = fieldName;
+		this.message = message;
+	}
+
+	public String getFieldName() {
+		return fieldName;
+	}
+
+	public void setFieldName(String fieldName) {
+		this.fieldName = fieldName;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 }

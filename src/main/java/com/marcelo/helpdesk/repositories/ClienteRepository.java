@@ -1,7 +1,9 @@
 package com.marcelo.helpdesk.repositories;
 
-import com.marcelo.helpdesk.domain.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.marcelo.helpdesk.domain.Cliente;
+
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
+
 }
